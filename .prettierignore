@@ -1,0 +1,11 @@
+echo '# Ignore artifacts:
+build
+dist
+coverage
+node_modules
+
+# Ignore other files:
+*.html
+*.svg
+*.json
+' > .prettierignore
