@@ -1,5 +1,4 @@
-import { AuthResponse, UserData } from '@/types/auth';
-import { jwtDecode } from 'jwt-decode';
+import { UserData } from '@/types/index';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -9,9 +8,8 @@ interface AuthState {
 }
 
 interface AuthActions {
-  saveUser: (data: AuthResponse) => void;
+  saveUser: (data: UserData) => void;
   logout: () => void;
-  getToken: () => string | null;
 }
 
 export const useAuthStore = create(
@@ -19,19 +17,12 @@ export const useAuthStore = create(
     (set) => ({
       isAuthenticated: false,
       user: null,
-      saveUser: (data: AuthResponse) => {
-        if (!data.accessToken) return;
-        const decodedUser = jwtDecode<UserData & { exp: number }>(
-          data.accessToken
-        );
-        set({ user: decodedUser, isAuthenticated: true });
-        localStorage.setItem('auth_token', data.accessToken);
+      saveUser: async (data: UserData) => {
+        set({ user: data, isAuthenticated: true });
       },
       logout: () => {
         set({ user: null, isAuthenticated: false });
-        localStorage.removeItem('auth_token');
       },
-      getToken: () => localStorage.getItem('auth_token'),
     }),
     {
       name: 'auth-storage',

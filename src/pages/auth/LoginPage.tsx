@@ -1,22 +1,31 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff } from 'lucide-react';
-import { loginUser } from '../../api/auth';
 import { useAuthStore } from '@/store/authStore';
+import { UserData } from '@/types';
 
 // Zod schema
 const loginSchema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z
+    .string()
+    .email('Invalid email')
+    .endsWith('@espol.edu.ec', 'Invalid email')
+    .max(30, 'Invalid email')
+    .refine(
+      (email) => {
+        const username = email.split('@')[0];
+        return /^[a-zA-Z]{5,}/.test(username);
+      },
+      {
+        message: 'Invalid email',
+      }
+    ),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
   const saveUser = useAuthStore((state) => state.saveUser);
   const navigate = useNavigate();
 
@@ -29,13 +38,18 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    const response = await loginUser(data);
-    if (!response.error) {
-      saveUser(response);
-      console.log('Login successful:', response);
-      navigate('/dashboard');
-      console.log('navigating to dashboard');
-    }
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+
+    const timestampInSeconds = Math.floor(tomorrow.getTime() / 1000);
+    const userData: UserData = {
+      email: data.email,
+      exp: timestampInSeconds,
+      generations: 0,
+    };
+    saveUser(userData);
+    navigate('/');
   };
 
   return (
@@ -55,28 +69,6 @@ export default function LoginForm() {
         />
         {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium">Password</label>
-        <div className="relative">
-          <input
-            data-testid="password-input"
-            type={showPassword ? 'text' : 'password'}
-            {...register('password')}
-            className="w-full mt-1 p-2 border rounded-md pr-10"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute right-2 top-2.5 text-gray-600"
-          >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-        </div>
-        {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
       </div>
 

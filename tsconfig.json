@@ -26,12 +26,9 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
-      "@services/*": ["src/services/*"]
     }
   },
   "include": ["src","cypress"],
