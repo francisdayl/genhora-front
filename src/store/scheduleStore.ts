@@ -1,93 +1,83 @@
-import {
-  GeneratedSchedule,
-  Parallel,
-  SchedulePreferences,
-  Subject,
-  WorkflowStep,
-} from '@/types/schedule';
 import { create } from 'zustand';
+import {
+  Subject,
+  SubjectWithParallels,
+  Preferences,
+  WorkflowStep,
+} from '../types';
 
-interface ScheduleState {
+interface ScheduleStore {
   currentStep: WorkflowStep;
-  selectedSubjects: Subject[];
-  subjectParallels: Record<string, Parallel[]>;
-  preferences: SchedulePreferences;
-  generatedSchedules: GeneratedSchedule[];
+  selectedSubjects: SubjectWithParallels[];
+  preferences: Preferences | null;
 
   // Actions
   setCurrentStep: (step: WorkflowStep) => void;
   addSubject: (subject: Subject) => void;
-  removeSubject: (subjectId: string) => void;
-  addParallel: (subjectId: string, parallel: Parallel) => void;
-  removeParallel: (subjectId: string, parallelId: string) => void;
-  setPreferences: (preferences: SchedulePreferences) => void;
-  setGeneratedSchedules: (schedules: GeneratedSchedule[]) => void;
-  resetStore: () => void;
+  removeSubject: (code: string) => void;
+  addParallel: (subjectCode: string, parallel: string) => void;
+  removeParallel: (subjectCode: string, parallel: string) => void;
+  setPreferences: (preferences: Preferences) => void;
+  reset: () => void;
 }
 
-export const useScheduleStore = create<ScheduleState>((set) => ({
-  currentStep: 1,
+export const useScheduleStore = create<ScheduleStore>((set, _) => ({
+  currentStep: 'choose-subjects',
   selectedSubjects: [],
-  subjectParallels: {},
-  preferences: {
-    entryTime: '',
-    exitTime: '',
-    maxSubjectsPerDay: 3,
-  },
-  generatedSchedules: [],
+  preferences: null,
 
   setCurrentStep: (step) => set({ currentStep: step }),
 
   addSubject: (subject) =>
+    set((state) => {
+      const exists = state.selectedSubjects.some(
+        (s) => s.code === subject.code
+      );
+      if (exists) return state;
+
+      return {
+        selectedSubjects: [
+          ...state.selectedSubjects,
+          {
+            ...subject,
+            parallels: [],
+          },
+        ],
+      };
+    }),
+
+  removeSubject: (code) =>
     set((state) => ({
-      selectedSubjects: [...state.selectedSubjects, subject],
+      selectedSubjects: state.selectedSubjects.filter((s) => s.code !== code),
     })),
 
-  removeSubject: (subjectId) =>
+  addParallel: (subjectCode, parallel) =>
     set((state) => ({
-      selectedSubjects: state.selectedSubjects.filter(
-        (s) => s.id !== subjectId
+      selectedSubjects: state.selectedSubjects.map((subject) =>
+        subject.code === subjectCode
+          ? { ...subject, parallels: [...subject.parallels, parallel] }
+          : subject
       ),
-      subjectParallels: Object.fromEntries(
-        Object.entries(state.subjectParallels).filter(
-          ([key]) => key !== subjectId
-        )
+    })),
+
+  removeParallel: (subjectCode, parallel) =>
+    set((state) => ({
+      selectedSubjects: state.selectedSubjects.map((subject) =>
+        subject.code === subjectCode
+          ? {
+              ...subject,
+              parallels: subject.parallels.filter((p) => p !== parallel),
+            }
+          : subject
       ),
-    })),
-
-  addParallel: (subjectId, parallel) =>
-    set((state) => ({
-      subjectParallels: {
-        ...state.subjectParallels,
-        [subjectId]: [...(state.subjectParallels[subjectId] || []), parallel],
-      },
-    })),
-
-  removeParallel: (subjectId, parallelId) =>
-    set((state) => ({
-      subjectParallels: {
-        ...state.subjectParallels,
-        [subjectId]:
-          state.subjectParallels[subjectId]?.filter(
-            (p) => p.id !== parallelId
-          ) || [],
-      },
     })),
 
   setPreferences: (preferences) => set({ preferences }),
 
-  setGeneratedSchedules: (schedules) => set({ generatedSchedules: schedules }),
-
-  resetStore: () =>
+  reset: () =>
     set({
-      currentStep: 1,
+      currentStep: 'choose-subjects',
       selectedSubjects: [],
-      subjectParallels: {},
-      preferences: {
-        entryTime: '',
-        exitTime: '',
-        maxSubjectsPerDay: 3,
-      },
-      generatedSchedules: [],
+      preferences: null,
     }),
 }));
