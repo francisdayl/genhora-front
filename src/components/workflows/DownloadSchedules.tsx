@@ -35,12 +35,6 @@ export const DownloadSchedules = () => {
         ),
       };
 
-      console.log('Downloading schedules with payload:', payload);
-
-      // Simulate API call
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // In a real implementation, you would make the API call here:
       const response = await downloadSchedules(payload);
       const blob = new Blob([response], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -60,14 +54,11 @@ export const DownloadSchedules = () => {
         description:
           'Your schedule file has been saved to your downloads folder.',
       });
-    } catch (error) {
-      console.error('Error downloading schedules:', error);
-
+    } catch (error: any) {
       // Show error toast
       toast({
         title: 'Failed to download schedules',
-        description:
-          'An error occurred while generating your schedules. Please try again.',
+        description: error.message,
         variant: 'destructive',
       });
     } finally {

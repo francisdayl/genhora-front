@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 
 interface PortalLayoutProps {
@@ -20,18 +20,9 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
       <header className="bg-white shadow sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-6">
-            <Link
-              to="/dashboard"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/posts"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-            >
-              Posts
-            </Link>
+            <span>
+              Hola, <strong>dfyanez</strong>
+            </span>
           </div>
           <a
             data-testid="sign-out"
@@ -44,9 +35,13 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {children}
-      </main>
+      <main className="w-full">{children}</main>
+      <hr></hr>
+      <footer className="py-2 bg-gray-50 text-sm">
+        <span>
+          Hecho por: <strong>David Yanez</strong>
+        </span>
+      </footer>
     </>
   );
 }

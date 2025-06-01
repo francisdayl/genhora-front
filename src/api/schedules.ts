@@ -25,7 +25,6 @@ export const fetchSubjects = async (): Promise<Record<string, string>> => {
     const response = await axiosInstance.get('/subjects');
     return response.data;
   } catch (error) {
-    console.error('Error fetching subjects:', error);
     throw error;
   }
 };
@@ -35,7 +34,6 @@ export const fetchSubjectParallels = async (subjectCode: string) => {
     const response = await axiosInstance.get(`/paralels/${subjectCode}`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching subject paralles:', error);
     throw error;
   }
 };
@@ -44,8 +42,12 @@ export const downloadSchedules = async (data: GenHoraPayload) => {
   try {
     const response = await axiosDownloadClient.post('/schedules', data);
     return response.data;
-  } catch (error) {
-    console.error('Error while creating the schedules:', error);
-    throw error;
+  } catch (error: any) {
+    if (error.response?.data instanceof Blob) {
+      const errorText = await error.response.data.text();
+      const errorData = JSON.parse(errorText);
+      throw new Error(errorData.detail);
+    }
+    throw new Error('Failed to download schedules');
   }
 };

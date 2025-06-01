@@ -46,27 +46,27 @@ export const Sidebar = () => {
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => toggleExpanded(subject.code)}
-                    className="flex items-center flex-1 text-left"
+                    className="flex items-center text-left min-w-0 flex-1 mr-2"
                   >
                     {isExpanded ? (
-                      <ChevronDown className="w-4 h-4 mr-2 text-gray-500" />
+                      <ChevronDown className="w-4 h-4 mr-2 text-gray-500 flex-shrink-0" />
                     ) : (
-                      <ChevronRight className="w-4 h-4 mr-2 text-gray-500" />
+                      <ChevronRight className="w-4 h-4 mr-2 text-gray-500 flex-shrink-0" />
                     )}
-                    <div className='text-ellipsis'>
-                      <p className="font-medium text-gray-900">
+                    <div className="min-w-0 flex-1">
+                      <div className="font-medium text-gray-900 truncate">
                         {subject.code}
-                      </p>
-                      <p className="text-sm text-gray-500 ">
+                      </div>
+                      <div className="text-sm text-gray-500 truncate">
                         {subject.name}
-                      </p>
+                      </div>
                     </div>
                   </button>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => removeSubject(subject.code)}
-                    className="ml-2 text-red-500 hover:text-red-700 hover:bg-red-50"
+                    className="text-red-500 hover:text-red-700 hover:bg-red-50 flex-shrink-0"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
