@@ -18,18 +18,18 @@ const preferencesSchema = z.object({
     .string()
     .regex(
       /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-      'Please enter time in HH:MM format'
+      'Por favor ingrese el tiempo en formato HH:MM'
     ),
   endTime: z
     .string()
     .regex(
       /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-      'Please enter time in HH:MM format'
+      'Por favor ingrese el tiempo en formato HH:MM'
     ),
   maxSubjectsPerDay: z
     .number()
-    .min(2, 'Minimum 2 subjects per day')
-    .max(10, 'Maximum 10 subjects per day'),
+    .min(2, 'Minimo 2 materias por dia')
+    .max(10, 'Maximo 6 materias por dia'),
 });
 
 type PreferencesForm = z.infer<typeof preferencesSchema>;
@@ -78,18 +78,17 @@ export const SetPreferences = () => {
     <div className="flex-1 p-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Set Your Preferences
+          Elija sus preferencias
         </h1>
         <p className="text-gray-600 mb-8">
-          Configure your schedule preferences to generate the best possible
-          schedules.
+          Elija sus preferencias para la generación de horarios.
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Start Time */}
             <div className="space-y-2">
-              <Label htmlFor="startTime">Entry Time</Label>
+              <Label htmlFor="startTime">Hora de Entrada</Label>
               <Input
                 id="startTime"
                 type="time"
@@ -105,7 +104,7 @@ export const SetPreferences = () => {
 
             {/* End Time */}
             <div className="space-y-2">
-              <Label htmlFor="endTime">Exit Time</Label>
+              <Label htmlFor="endTime">Hora de Salida</Label>
               <Input
                 id="endTime"
                 type="time"
@@ -120,7 +119,9 @@ export const SetPreferences = () => {
 
           {/* Max Subjects Per Day */}
           <div className="space-y-2">
-            <Label htmlFor="maxSubjectsPerDay">Maximum Subjects Per Day</Label>
+            <Label htmlFor="maxSubjectsPerDay">
+              Cantidad maxima de materias por dia
+            </Label>
             <Select
               value={watchedMaxSubjects?.toString()}
               onValueChange={(value) =>
@@ -135,7 +136,7 @@ export const SetPreferences = () => {
               <SelectContent>
                 {generateSubjectOptions().map((num) => (
                   <SelectItem key={num} value={num.toString()}>
-                    {num} subjects
+                    {num} materias
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -146,7 +147,7 @@ export const SetPreferences = () => {
               </p>
             )}
             <p className="text-sm text-gray-500">
-              You have {maxPossibleSubjects} subjects selected
+              Has elejido {maxPossibleSubjects} materias
             </p>
           </div>
 
@@ -155,7 +156,7 @@ export const SetPreferences = () => {
             disabled={!isValid}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium"
           >
-            Generate Schedules
+            Generar Horarios
           </Button>
         </form>
       </div>

@@ -1,10 +1,10 @@
 import { useScheduleStore } from '@/store/scheduleStore';
 
 const steps = [
-  { id: 'choose-subjects', label: 'Choose Subjects' },
-  { id: 'choose-parallels', label: 'Choose Parallels' },
-  { id: 'preferences', label: 'Set Preferences' },
-  { id: 'download', label: 'Download Schedules' },
+  { id: 'choose-subjects', label: 'Agregar Materias' },
+  { id: 'choose-parallels', label: 'Elegir Paralelos' },
+  { id: 'preferences', label: 'Preferencias' },
+  { id: 'download', label: 'Descargar Horarios' },
 ];
 
 export const WorkflowProgress = () => {

@@ -78,38 +78,33 @@ export const DownloadSchedules = () => {
     <div className="flex-1 p-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Download Schedules
+          Descargar Horarios
         </h1>
         <p className="text-gray-600 mb-8">
-          Your schedule preferences have been configured. Download your
-          generated schedules below.
+          En base a tus preferencias se generaran todos los posibles horarios.
         </p>
 
         {/* Summary */}
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Schedule Summary
+            Resumen para la planificación de horarios:
           </h2>
 
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Total Subjects:</span>
+              <span className="text-gray-600">Total de Materias:</span>
               <span className="font-medium">{selectedSubjects.length}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Subjects with Parallels:</span>
-              <span className="font-medium">
-                {subjectsWithParallels.length}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Time Range:</span>
+              <span className="text-gray-600">Horario de clases:</span>
               <span className="font-medium">
                 {preferences?.startTime} - {preferences?.endTime}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Max Subjects/Day:</span>
+              <span className="text-gray-600">
+                Maxima cantidad de materias por dia:
+              </span>
               <span className="font-medium">
                 {preferences?.maxSubjectsPerDay}
               </span>
@@ -119,7 +114,7 @@ export const DownloadSchedules = () => {
           {subjectsWithParallels.length > 0 && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <h3 className="text-sm font-medium text-gray-700 mb-2">
-                Subjects with Parallels:
+                Materias elegidas con sus paralelos:
               </h3>
               <div className="space-y-1">
                 {subjectsWithParallels.map((subject) => (
@@ -143,20 +138,19 @@ export const DownloadSchedules = () => {
             {isDownloading ? (
               <>
                 <RefreshCw className="w-5 h-5 animate-spin" />
-                Generating Schedules...
+                Generando Horarios...
               </>
             ) : (
               <>
                 <Download className="w-5 h-5" />
-                Download Schedules
+                Descargar Horarios
               </>
             )}
           </Button>
 
           {subjectsWithParallels.length === 0 && (
             <p className="text-sm text-orange-600 text-center">
-              No subjects with parallels selected. Please go back and add some
-              parallels.
+              No hay materias con paralelos. Regrese y complete la informacion.
             </p>
           )}
 
@@ -165,7 +159,7 @@ export const DownloadSchedules = () => {
             variant="outline"
             className="w-full py-3 rounded-lg font-medium"
           >
-            Start Over
+            Volver a empezar
           </Button>
         </div>
       </div>

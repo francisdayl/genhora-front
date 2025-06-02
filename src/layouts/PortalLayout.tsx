@@ -7,6 +7,7 @@ interface PortalLayoutProps {
 
 export default function PortalLayout({ children }: PortalLayoutProps) {
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
   async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -21,16 +22,16 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <span>
-              Hola, <strong>dfyanez</strong>
+              Hola, <strong>{user?.email}</strong>
             </span>
           </div>
           <a
             data-testid="sign-out"
             href="#"
             onClick={handleSignOut}
-            className="text-red-500 hover:text-red-600 font-medium transition-colors"
+            className="bg-red-500 hover:bg-red-600 font-medium transition-colors text-white px-4 py-1 rounded"
           >
-            Sign out
+            Salir
           </a>
         </nav>
       </header>

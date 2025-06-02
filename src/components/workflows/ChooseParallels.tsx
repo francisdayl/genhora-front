@@ -43,10 +43,10 @@ export const ChooseParallels = () => {
       <div className="flex-1 p-8">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            No Subjects Selected
+            No se han agregado materias
           </h1>
           <p className="text-gray-600">
-            Please go back and select some subjects first.
+            Vuelva al paso anterior y agregue materias.
           </p>
         </div>
       </div>
@@ -57,11 +57,11 @@ export const ChooseParallels = () => {
     <div className="flex-1 p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Choose Parallels
+          Agregar Paralelos
         </h1>
         <p className="text-gray-600 mb-8">
-          Select parallels for each subject. Click on a subject to add its
-          parallels.
+          Seleccione los paralelos de cada materia. Dele click a la materia para
+          seleccionar sus paralelos.
         </p>
 
         {/* Subject Selection */}
@@ -84,7 +84,7 @@ export const ChooseParallels = () => {
               <div className="text-left">
                 <div className="font-medium">{subject.code}</div>
                 <div className="text-xs text-gray-500">
-                  {subject.parallels.length} parallel
+                  {subject.parallels.length} paralelo
                   {subject.parallels.length !== 1 ? 's' : ''}
                 </div>
               </div>
@@ -96,13 +96,13 @@ export const ChooseParallels = () => {
         {currentSubject && (
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Add parallels for {currentSubject.code}
+              Elija los paralelos para la materia: {currentSubject.code}
             </h2>
 
             <div className="relative">
               <Input
                 type="text"
-                placeholder="Search parallels..."
+                placeholder="Buscar paralelos..."
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
@@ -141,7 +141,7 @@ export const ChooseParallels = () => {
             {currentSubject.parallels.length > 0 && (
               <div className="mt-4">
                 <h3 className="text-sm font-medium text-gray-700 mb-2">
-                  Selected parallels:
+                  Paralelos seleccionados:
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {currentSubject.parallels.map((parallel) => (
@@ -162,7 +162,7 @@ export const ChooseParallels = () => {
           onClick={handleNext}
           className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium"
         >
-          Set Preferences
+          Preferencias
         </Button>
       </div>
     </div>

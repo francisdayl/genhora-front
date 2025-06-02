@@ -40,16 +40,16 @@ export const ChooseSubjects = () => {
     <div className="flex-1 p-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Choose Subjects
+          Agregar Materias
         </h1>
         <p className="text-gray-600 mb-8">
-          Search and select the subjects you want to include in your schedule.
+          Busque y elija las materias con las que desea armar su horario
         </p>
 
         <div className="relative mb-8">
           <Input
             type="text"
-            placeholder="Write your subject"
+            placeholder="Escriba la materia por nombre o codigo"
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -63,7 +63,7 @@ export const ChooseSubjects = () => {
           {showDropdown && searchTerm && (
             <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto z-10">
               {isLoading ? (
-                <div className="p-4 text-center text-gray-500">Loading...</div>
+                <div className="p-4 text-center text-gray-500">Cargando...</div>
               ) : filteredSubjects.length > 0 ? (
                 filteredSubjects.map((subject) => (
                   <button
@@ -79,7 +79,7 @@ export const ChooseSubjects = () => {
                 ))
               ) : (
                 <div className="p-4 text-center text-gray-500">
-                  No subjects found
+                  No se encontraron materias
                 </div>
               )}
             </div>
@@ -91,7 +91,7 @@ export const ChooseSubjects = () => {
           disabled={selectedSubjects.length === 0}
           className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium"
         >
-          Add Parallels
+          Agregar Paralelos
         </Button>
       </div>
     </div>
