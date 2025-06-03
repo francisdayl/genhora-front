@@ -37,6 +37,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
       </header>
 
       <main className="w-full">{children}</main>
+
       <hr></hr>
       <footer className="py-2 bg-gray-50 text-sm">
         <span>
