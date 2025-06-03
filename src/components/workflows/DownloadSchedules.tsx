@@ -54,11 +54,12 @@ export const DownloadSchedules = () => {
         description:
           'Your schedule file has been saved to your downloads folder.',
       });
-    } catch (error: any) {
+    } catch (error) {
       // Show error toast
       toast({
         title: 'Failed to download schedules',
-        description: error.message,
+        description:
+          error instanceof Error ? error.message : 'An unknown error occurred.',
         variant: 'destructive',
       });
     } finally {

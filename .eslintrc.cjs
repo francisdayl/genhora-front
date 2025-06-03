@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'cypress.*', 'cypress/*'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
@@ -15,4 +15,18 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-}
+  overrides: [
+    {
+      files: ['src/components/**/*'],
+      rules: {
+        'react-refresh/only-export-components': 'off'
+      }
+    },
+    {
+      files: ['src/store/scheduleStore.ts'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off'
+      }
+    },
+  ]
+};

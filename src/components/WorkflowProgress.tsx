@@ -1,6 +1,12 @@
 import { useScheduleStore } from '@/store/scheduleStore';
+import { WorkflowStep } from '@/types';
 
-const steps = [
+interface WorkflowStepPair {
+  id: string;
+  label: string;
+}
+
+const steps: WorkflowStepPair[] = [
   { id: 'choose-subjects', label: 'Agregar Materias' },
   { id: 'choose-parallels', label: 'Elegir Paralelos' },
   { id: 'preferences', label: 'Preferencias' },
@@ -46,7 +52,7 @@ export const WorkflowProgress = () => {
 
   const handleStepClick = (stepId: string, stepIndex: number) => {
     if (canNavigateToStep(stepIndex, stepId)) {
-      setCurrentStep(stepId as any);
+      setCurrentStep(stepId as WorkflowStep);
     }
   };
 
