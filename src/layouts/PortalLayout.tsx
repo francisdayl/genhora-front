@@ -19,9 +19,12 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
   return (
     <>
       <header className="bg-white shadow sticky top-0 z-50">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <nav
+          data-testid="app-header"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+        >
           <div className="flex items-center space-x-6">
-            <span>
+            <span data-testid="user-mail">
               Hola, <strong>{user?.email}</strong>
             </span>
           </div>

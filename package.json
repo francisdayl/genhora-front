@@ -12,7 +12,8 @@
     "format": "prettier --write --log-level warn \"src/**/*.{js,jsx,ts,tsx}\"",
     "format:check": "prettier --check --log-level warn  \"src/**/*.{js,jsx,ts,tsx}\"",
     "cypress:open": "cypress open",
-    "test": "cypress run",
+    "cypress:test": "cypress run",
+    "test": "cypress run --no-runner-ui",
     "prepare": "husky"
   },
   "dependencies": {

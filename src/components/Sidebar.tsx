@@ -33,7 +33,7 @@ export const Sidebar = () => {
     <div className="w-80 bg-gray-50 border-r border-gray-200 p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Materias</h2>
 
-      <div className="space-y-2">
+      <div data-testid="sidebar-items-container" className="space-y-2">
         {selectedSubjects.map((subject) => {
           const isExpanded = expandedSubjects.has(subject.code);
 

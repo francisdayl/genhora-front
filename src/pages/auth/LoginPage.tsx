@@ -15,7 +15,7 @@ const loginSchema = z.object({
     .refine(
       (email) => {
         const username = email.split('@')[0];
-        return /^[a-zA-Z]{5,}/.test(username);
+        return /^[a-zA-Z]{5,15}$/.test(username);
       },
       {
         message: 'Invalid email',
@@ -68,7 +68,9 @@ export default function LoginForm() {
           className="w-full mt-1 p-2 border rounded-md"
         />
         {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
+          <p data-testid="email-error" className="text-red-500 text-sm">
+            {errors.email.message}
+          </p>
         )}
       </div>
 

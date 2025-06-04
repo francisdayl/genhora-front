@@ -25,9 +25,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex w-full bg-gray-50">
+    <div
+      data-testid="sidebar-container"
+      className="min-h-screen flex w-full bg-gray-50"
+    >
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      <div data-testid="workflow-container" className="flex-1 flex flex-col">
         <WorkflowProgress />
         {renderCurrentWorkflow()}
       </div>

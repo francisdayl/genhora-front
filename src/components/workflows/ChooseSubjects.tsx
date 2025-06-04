@@ -50,6 +50,7 @@ export const ChooseSubjects = () => {
           <Input
             type="text"
             placeholder="Escriba la materia por nombre o codigo"
+            data-testid="subject-input"
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -61,13 +62,17 @@ export const ChooseSubjects = () => {
           />
 
           {showDropdown && searchTerm && (
-            <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto z-10">
+            <div
+              data-testid="subjects-result-container"
+              className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto z-10"
+            >
               {isLoading ? (
                 <div className="p-4 text-center text-gray-500">Cargando...</div>
               ) : filteredSubjects.length > 0 ? (
                 filteredSubjects.map((subject) => (
                   <button
                     key={subject.code}
+                    data-testclass="subject-item"
                     onClick={() => handleSubjectSelect(subject)}
                     className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0"
                   >
@@ -78,7 +83,10 @@ export const ChooseSubjects = () => {
                   </button>
                 ))
               ) : (
-                <div className="p-4 text-center text-gray-500">
+                <div
+                  data-testid="subjects-not-found"
+                  className="p-4 text-center text-gray-500"
+                >
                   No se encontraron materias
                 </div>
               )}
