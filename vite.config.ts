@@ -5,7 +5,6 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const isProduction = mode === 'production'
-  
   return {
     plugins: [react()],
     base: isProduction ? 'https://francisdayl.github.io/genhora-front' : '/',
