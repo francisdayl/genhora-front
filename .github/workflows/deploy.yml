@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
           echo "VITE_MODE=${{ secrets.VITE_MODE }}" >> .env
+          cat .env
           
       - name: Build project
         run: npm run build
