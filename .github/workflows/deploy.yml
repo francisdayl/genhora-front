@@ -32,15 +32,17 @@ jobs:
           
       - name: Install dependencies
         run: npm i
-        
-      - name: Create environment file
+
+      - name: Verificar longitud de las variables de entorno
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
-          echo "VITE_MODE=${{ secrets.VITE_MODE }}" >> .env
-          cat .env
+          echo "VITE_API_URL length: ${#VITE_API_URL}"
+          echo "VITE_MODE length: ${#VITE_MODE}"
           
       - name: Build project
         run: npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_MODE: ${{ secrets.VITE_MODE }}
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
