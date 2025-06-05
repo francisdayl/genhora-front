@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: 20.x
           cache: 'npm'
+      
+      - name: Setup environment file
+        run: cp .env.template .env
           
       - name: Install dependencies
         run: npm i
