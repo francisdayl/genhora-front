@@ -22,7 +22,7 @@ export const Sidebar = () => {
 
   if (selectedSubjects.length === 0) {
     return (
-      <div className="w-80 bg-gray-50 border-r border-gray-200 p-6">
+      <div className="w-80 bg-gray-50 border-r border-gray-200 p-8">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Materias</h2>
         <p className="text-sm text-gray-500">No hay materias agregadas</p>
       </div>
