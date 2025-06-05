@@ -8,7 +8,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [react()],
-    base: isProduction ? '/genhora-front/' : '/',
+    base: isProduction ? 'https://francisdayl.github.io/genhora-front' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
