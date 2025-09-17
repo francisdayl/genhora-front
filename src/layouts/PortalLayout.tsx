@@ -38,6 +38,9 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
           </a>
         </nav>
       </header>
+      <p className="absolute top-0 right-3 z-[10000] text-[10px]">
+        Last Update: 17/09/25
+      </p>
 
       <main className="w-full">{children}</main>
 

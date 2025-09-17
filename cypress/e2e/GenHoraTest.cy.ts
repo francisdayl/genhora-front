@@ -1,4 +1,4 @@
-const authState = '{"state":{"isAuthenticated":true,"user":{"email":"dfyanez@espol.edu.ec","exp":2748993756,"generations":0}},"version":0}'
+const authState = '{"state":{"isAuthenticated":true,"user":{"email":"randomuser@espol.edu.ec","exp":2748993756,"generations":0}},"version":0}'
 
 const subjects = {
     "ARTG2045": "APRECIACIÓN MUSICAL",
@@ -91,7 +91,7 @@ describe('Genhora WorkFlow tests', () => {
   })
 
   it('Add Subjects Workflow', () => {
-    cy.intercept('GET', '/subjects', {
+    cy.intercept('GET', '**/subjects', {
       statusCode: 200,
       body:subjects
     }).as('getSubjectsSucces');

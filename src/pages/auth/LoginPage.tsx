@@ -10,7 +10,7 @@ const loginSchema = z.object({
   email: z
     .string()
     .email('Invalid email')
-    .endsWith('edu.ec', 'Invalid email')
+    .endsWith('espol.edu.ec', 'Invalid email')
     .max(30, 'Invalid email')
     .refine(
       (email) => {
