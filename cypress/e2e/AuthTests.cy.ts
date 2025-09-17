@@ -24,7 +24,7 @@ describe('Auth spec', () => {
     )
   })
 
-  it('should not let users out of college login', () => {
+  it('should not let users out of espol login', () => {
     cy.visit('http://localhost:5173/');
     cy.get('[data-testid="email-input"]').type('dfyanez@gmail.com');
     cy.get('[data-testid="login-button"]').click();
