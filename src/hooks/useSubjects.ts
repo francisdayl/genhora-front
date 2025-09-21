@@ -7,7 +7,6 @@ export const useSubjects = () => {
     queryKey: ['subjects'],
     queryFn: async (): Promise<Subject[]> => {
       const subjects: Record<string, string> = await fetchSubjects();
-      console.log(subjects);
       return Object.entries(subjects).map(([code, name]) => ({
         code,
         name,

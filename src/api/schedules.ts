@@ -50,13 +50,10 @@ export const downloadSchedules = async (data: GenHoraPayload) => {
       };
 
       if (axiosError.response.data instanceof Blob) {
-        try {
-          const errorText = await axiosError.response.data.text();
-          const errorData = JSON.parse(errorText) as { detail?: string };
-          throw new Error(errorData.detail || 'Unknown error occurred');
-        } catch (parseError) {
-          throw new Error('Failed to parse error response');
-        }
+        const errorText = await axiosError.response.data.text();
+        const errorData = JSON.parse(errorText) as { detail?: string };
+        const errorMessage = errorData.detail ?? 'Unknown error occurred';
+        throw new Error(errorMessage);
       }
     }
 
